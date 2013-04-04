@@ -8,6 +8,11 @@ Once compiled with V-Play engine all V-Play demos and examples can just
 be rendered. Tested only of Mac OS X but should work on Windows or Linux
 as well.
 
+Even developing new games or QML applications can be done by using this 
+generic player. Starting new project will just be a matter of creating QML files 
+with images and other required files in the same folder and executing vplay with 
+main QML file.
+
 ## Build and installation
 
 - Clone this repo: git clone https://github.com/vseryakov/v-player.git
@@ -22,6 +27,15 @@ as well.
 - Browse V-Play SDK Demos now and run games using vplay
 - cd /opt/local/v-play/Demos/V-PlaySDK/CarChallenge/qml
 - vplay CarChallengeMain.qml
+
+## Creating new project
+
+- mkdir MyNewGame
+- cd MyNewGame
+- vi main.qml ....
+- vplay
+- vi main.qml ...
+...
 
 ## Author
 Vlad Seryakov
