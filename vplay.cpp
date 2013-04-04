@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include <QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeView>
+#include <QIcon>
 #include <QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
@@ -12,6 +13,9 @@
 
 #include "qmlapplicationviewer.h"
 #include "vplayapplication.h"
+
+#define Stringify2(x)                  #x
+#define Stringify(x)                   Stringify2(x)
 
 // Support all possible combinations to run this as an app bundle or standalone utility
 static QString adjustPath(const QString &path)
@@ -45,6 +49,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app->setApplicationName("vplay");
     app->addLibraryPath(app->applicationDirPath() + "/../plugins");
     app->addLibraryPath(app->applicationDirPath() + "/../imports");
+    app->setWindowIcon(QIcon(QPixmap(":/vplay.png")));
 
     QmlApplicationViewer viewer;
     VPlayApplication vplayApplication(viewer);
@@ -52,10 +57,20 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     viewer.setResizeMode(QDeclarativeView::SizeRootObjectToView);
     viewer.setAttribute(Qt::WA_AutoOrientation, true);
+
     viewer.engine()->addImportPath(adjustPath("qml"));
-    viewer.engine()->addImportPath(adjustPath("imports"));
     viewer.engine()->addPluginPath(adjustPath("qml"));
+    viewer.engine()->addImportPath(adjustPath("imports"));
     viewer.engine()->addPluginPath(adjustPath("plugins"));
+
+#ifdef QML_GENERIC_PATH
+    viewer.engine()->addImportPath(Stringify(QML_GENERIC_PATH));
+    viewer.engine()->addPluginPath(Stringify(QML_GENERIC_PATH));
+#endif
+#ifdef QML_PLATFORM_PATH
+    viewer.engine()->addImportPath(Stringify(QML_PLATFORM_PATH));
+    viewer.engine()->addPluginPath(Stringify(QML_PLATFORM_PATH));
+#endif
 
     vplayApplication.setMainQmlFileName(qml);
     Q_INIT_RESOURCE(resources_vplay);

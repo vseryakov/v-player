@@ -1,13 +1,12 @@
-# Compiled Object files
+.settings
+.project
+.cproject
+moc_*
 *.slo
 *.lo
 *.o
-
-# Compiled Dynamic libraries
 *.so
 *.dylib
-
-# Compiled Static libraries
 *.lai
 *.la
 *.a
