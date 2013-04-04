@@ -1,6 +1,6 @@
 QT += declarative
 SOURCES += vplay.cpp qmlapplicationviewer.cpp
-HEADERS += qmlapplicationviewer.h
+HEADERS += vplay.h qmlapplicationviewer.h
 RESOURCES = vplay.qrc
 include(projectinclude.pri)
 

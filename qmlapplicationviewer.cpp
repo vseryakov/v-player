@@ -15,7 +15,7 @@
 #include <QtDeclarative/QDeclarativeComponent>
 #include <QtDeclarative/QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeContext>
-#include <QDebug>
+
 #include <qplatformdefs.h> // MEEGO_EDITION_HARMATTAN
 
 #ifdef HARMATTAN_BOOSTER
@@ -76,7 +76,6 @@ QmlApplicationViewer::QmlApplicationViewer(QWidget *parent)
     , d(new QmlApplicationViewerPrivate())
 {
     connect(engine(), SIGNAL(quit()), SLOT(close()));
-    connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)), this, SLOT(onStatusChanged(QDeclarativeView::Status)));
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
     // Qt versions prior to 4.8.0 don't have QML/JS debugging services built in
 #if defined(QMLJSDEBUGGER) && QT_VERSION < 0x040800
@@ -92,11 +91,6 @@ QmlApplicationViewer::QmlApplicationViewer(QWidget *parent)
 QmlApplicationViewer::~QmlApplicationViewer()
 {
     delete d;
-}
-
-void QmlApplicationViewer::onStatusChanged(QDeclarativeView::Status status)
-{
-   if (status == Error) exit(0);
 }
 
 QmlApplicationViewer *QmlApplicationViewer::create()
@@ -127,7 +121,7 @@ void QmlApplicationViewer::setOrientation(ScreenOrientation orientation)
         }
     }
 #endif // Q_OS_SYMBIAN
-    
+
     Qt::WidgetAttribute attribute;
     switch (orientation) {
 #if QT_VERSION < 0x040702
@@ -177,4 +171,3 @@ QApplication *createApplication(int &argc, char **argv)
     return new QApplication(argc, argv);
 #endif
 }
-
