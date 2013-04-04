@@ -56,9 +56,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QString qmlFile = app.adjustPath("main.qml");
     for (int i = 1; i < argc; i++) {
         if (QString(argv[i]).endsWith(".qml")) qmlFile = app.adjustPath(argv[i]);
-        if (QString(argv[i]) == "-qmlrender") vapp.setQmlRendererEnabled(true);
-        if (QString(argv[i]) == "-log") vapp.setLogMessagesEnabled(true);
-        if (QString(argv[i]) == "-no-log") vapp.setLogMessagesEnabled(false);
+        if (QString(argv[i]) == "-qmlrender" && i < argc - 1) vapp.setQmlRendererEnabled(atoi(argv[i+1]));
+        if (QString(argv[i]) == "-cocosrender" && i < argc - 1) vapp.setCocosRendererEnabled(atoi(argv[i+1]));
+        if (QString(argv[i]) == "-log" && i < argc - 1) vapp.setLogMessagesEnabled(atoi(argv[i+1]));
     }
     if (qmlFile.isEmpty()) {
         fprintf(stderr, "main Qml file not found\n");
