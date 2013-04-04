@@ -1,7 +1,9 @@
+vplay
 .settings
 .project
 .cproject
 moc_*
+qrc_*
 *.slo
 *.lo
 *.o
